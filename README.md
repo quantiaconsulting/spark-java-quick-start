@@ -1,5 +1,6 @@
 # spark-java-quick-start
 Examples to start using spark with Java
+**Note**: Spark runs on Java 8, make sure to have it installed on your system
 
 ## Project structure
 ### Root Package (com.quantiaconsulting.sjqs)
