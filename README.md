@@ -1,14 +1,14 @@
 # spark-java-quick-start
 Examples to start using spark with Java
 
-##Project structure
-###Root Package (com.quantiaconsulting.sjqs)
+## Project structure
+### Root Package (com.quantiaconsulting.sjqs)
 In the various sub-packages you can find the exercises to start using spark with the java APIs
 
-###Solutions Package (com.quantiaconsulting.sjqs.solutions)
+### Solutions Package (com.quantiaconsulting.sjqs.solutions)
 In this package you can find the solutions to the exercises.
 
-##Run the solutions
+## Run the solutions
 You can directly run the classes using e spark-submit.
 
 Instructions:
@@ -18,7 +18,8 @@ Instructions:
 	* unzip it on your system
 * Clone the repository
 * Go to the pom folder and compile the project (`mvn package`)
-* **Move the resources folder into the new target folder** (the resources must be in the same folder of the jar)
+* **Copy the resources folder into the new target folder** (the resources must be in the same folder of the jar)
+`cp -r resources/ target/`
 * Go to to the spark home folder (the main folder created during the unzip operations)
 * Run the `spark-submit` on a class of your choice
 
