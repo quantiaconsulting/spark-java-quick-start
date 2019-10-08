@@ -44,6 +44,10 @@ Instructions:
 	* com.quantiaconsulting.sjqs.solutions.DF.Preparation_DF_Advanced4
 	* com.quantiaconsulting.sjqs.solutions.ML.BikeSharing
 	* com.quantiaconsulting.sjqs.solutions.ML.NLP
-
+	
+## Utils
+* If you need to add additional repository to the maven pom please refer to:
+	* https://maven.apache.org/guides/introduction/introduction-to-repositories.html
+	* https://stackoverflow.com/questions/15429142/add-maven-repositories-for-a-project-in-eclipse
 
 
