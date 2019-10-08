@@ -5,8 +5,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.quantiaconsulting</groupId>
-    <artifactId>spark-java-quick-start</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <artifactId>sjqs</artifactId>
+    <version>1.0</version>
         <dependencies>
             <dependency> <!-- Spark dependency -->
                 <groupId>org.apache.spark</groupId>
