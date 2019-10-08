@@ -20,7 +20,7 @@ Instructions:
 * Clone the repository
 * Go to the pom folder and compile the project (`mvn package`)
 * **Copy the resources folder into the new target folder** (the resources must be in the same folder of the jar)
-`cp -r resources/ target/`
+`cp -r resources/ target/resources/`
 * Go to to the spark home folder (the main folder created during the unzip operations)
 * Run the `spark-submit` on a class of your choice
 
