@@ -29,7 +29,6 @@ public class Preparation_DF_Advanced2 {
 
         Dataset<Row> tempDF = spark
                 .read()
-                .option("inferSchema", "true")
                 .parquet(parquetFile);
 
         tempDF.cache();
