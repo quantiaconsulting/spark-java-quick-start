@@ -1,9 +1,8 @@
 package com.quantiaconsulting.sjqs;
 
 import com.quantiaconsulting.sjqs.ML.BikeSharing;
-import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaRDD;
-import org.apache.spark.api.java.JavaSparkContext;
+import org.apache.spark.sql.SparkSession;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -21,13 +20,12 @@ public class RDD {
 
         String logFile = decodedPath + "/resources/README.md";
 
-        SparkConf conf = new SparkConf()
-                .setAppName("Simple Application")
-                .setMaster("local");
+        SparkSession spark = SparkSession
+                .builder()
+                .appName("Simple Application")
+                .getOrCreate();
 
-        JavaSparkContext sc = new JavaSparkContext(conf);
-
-        JavaRDD<String> lines = sc.textFile(logFile);
+        JavaRDD<String> lines = spark.read().textFile(logFile).javaRDD();
 
         JavaRDD<Integer> lineLengths = lines.map(s -> s.length());
         int totalLength = lineLengths.reduce((a, b) -> a + b);
