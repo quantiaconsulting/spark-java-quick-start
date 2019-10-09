@@ -37,7 +37,7 @@ public class Ingestion_CSV_WithSchema {
         StructField field = DataTypes.createStructField("timestamp", DataTypes.TimestampType, true);
         fields.add(field);
 
-        //Take a look to the DF and complete the field definito
+        //Take a look to the DF and complete the fields
         //<FILL>
 
         StructType schema = DataTypes.createStructType(fields);
