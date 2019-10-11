@@ -22,7 +22,6 @@ public class NLP {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        String csvFile = decodedPath + "/resources/Bike-Sharing-Dataset/hour.csv";
 
         SparkSession spark = SparkSession
                 .builder()
