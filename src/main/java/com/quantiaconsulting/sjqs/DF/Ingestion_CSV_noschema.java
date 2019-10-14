@@ -25,9 +25,11 @@ public class Ingestion_CSV_noschema {
                 .appName("Simple Application")
                 .getOrCreate();
 
-//      Dataset<Row> tempDF = spark
-//                <FILL>
-//                .csv(csvFile);
+      Dataset<Row> tempDF = spark.read().option("header",true).option("inferSchema",true).csv(csvFile);
+
+      tempDF.printSchema();
+
+      tempDF.show();
 
         //cache, print schema and visualize 10 rows of the DF
         //<FILL>

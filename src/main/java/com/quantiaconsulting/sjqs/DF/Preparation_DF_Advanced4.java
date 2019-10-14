@@ -8,9 +8,7 @@ import org.apache.spark.sql.SparkSession;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 
-import static org.apache.spark.sql.functions.col;
-import static org.apache.spark.sql.functions.date_format;
-import static org.apache.spark.sql.functions.unix_timestamp;
+import static org.apache.spark.sql.functions.*;
 
 public class Preparation_DF_Advanced4 {
     public static void main(String[] args) {
@@ -39,12 +37,41 @@ public class Preparation_DF_Advanced4 {
 
         //Date Format: Format date column using format "u-E" (1-MON, 2-TUE, ecc), group by this new column and sum request. Create two DF, one for the mobile site and another for the desktop site
 
-        //Dataset<Row> mobileDF = tempDF.<FILL>
-        //Dataset<Row> desktopDF = tempDF.<FILL>
+        /*Dataset<Row> mobileDF = tempDF
+                .withColumn("DoW",date_format(col("timestamp"), "u-E"))
+                .groupBy("site","DoW")
+                .agg(expr("sum(requests) as SOMMA"),expr("avg(requests) as MEDIA"))
+                .orderBy("DoW")
+                ;*/
 
-        //Join the previous dataset
-        //Dataset<Row> jDF = desktopDF.join<FILL>;
-        //jDF.show(10);
+        Dataset<Row> mobileDF = tempDF
+                .withColumn("mDoW",date_format(col("timestamp"), "u-E"))
+                .groupBy("site","mDoW")
+                .agg(expr("sum(requests) as Somma_Mobile"))
+                .where("site = 'mobile'")
+                ;
+
+        System.out.println("=================== MOBILE ====================");
+        //mobileDF.explain();
+        //mobileDF.show();
+
+        Dataset<Row> desktopDF = tempDF.where("site = 'desktop'")
+                .withColumn("dDoW",date_format(col("timestamp"), "u-E"))
+                .groupBy("site","dDoW")
+                .agg(expr("sum(requests) as Somma_Desktop"))
+
+                ;
+
+        System.out.println("=================== DESKTOP ====================");
+        //desktopDF.explain();
+        //desktopDF.show();
+
+        Dataset<Row> jDF = desktopDF
+                .join(mobileDF,desktopDF.col("dDoW").equalTo(mobileDF.col("mDoW")))
+                .select("dDoW", "Somma_Mobile", "Somma_Desktop")
+                .orderBy("dDoW");
+
+        jDF.show(10);
 
         spark.stop();
     }

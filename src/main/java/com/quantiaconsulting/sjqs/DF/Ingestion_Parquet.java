@@ -26,10 +26,12 @@ public class Ingestion_Parquet {
                 .appName("Simple Application")
                 .getOrCreate();
 
-        //Dataset<Row> tempDF = <FILL>
+        Dataset<Row> tempDF = spark.read().parquet(parquetFile);
 
-        //cache, print schema and visualize 10 rows of the DF
-        //<FILL>
+        tempDF.printSchema();
+
+        tempDF.show();
+
 
         spark.stop();
 

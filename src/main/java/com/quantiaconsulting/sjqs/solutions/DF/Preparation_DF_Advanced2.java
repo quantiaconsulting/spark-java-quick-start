@@ -42,6 +42,8 @@ public class Preparation_DF_Advanced2 {
                 .groupBy("year", "site")
                 .sum("requests");
 
+        //.agg(expr("sum(requests) as SUM")); if we want to give a name to the new column
+
         grouped.show(10);
 
         spark.stop();

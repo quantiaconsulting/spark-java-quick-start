@@ -22,7 +22,6 @@ public class NLP {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        String csvFile = decodedPath + "/resources/Bike-Sharing-Dataset/hour.csv";
 
         SparkSession spark = SparkSession
                 .builder()
@@ -48,7 +47,7 @@ public class NLP {
 
         long positiveRatings = trainDF.filter("rating >= 5").count();
         long totalRatings = trainDF.count();
-        double baselineAccuracy = ((double) positiveRatings)/totalRatings*100;
+        double baselineAccuracy = ((double) positiveRatings)/totalRatings;
 
         System.out.println("Baseline accuracy: " + baselineAccuracy);
 

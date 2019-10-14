@@ -36,9 +36,13 @@ public class Preparation_DF_Advanced3 {
         tempDF.printSchema();
 
         //Date Format: Format date column using format "E" (MON, TUE, ecc), group by this new column and sum request
-        //Dataset<Row> dfDF = tempDF.<FILL>
+        Dataset<Row> dfDF = tempDF.withColumn("DoW",date_format(col("timestamp"), "E"));
+        //Dataset<Row> aggDF = dfDF.groupBy("DoW").sum("requests"); così il nome della colonna è sum(requests)
+        Dataset<Row> aggDF = dfDF.groupBy("DoW").agg(expr("sum(requests) as SOMMA"));
 
-        //dfDF.show(10);
+        dfDF.show(10);
+
+        aggDF.show(10);
 
         spark.stop();
     }

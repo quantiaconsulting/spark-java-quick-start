@@ -34,15 +34,22 @@ public class Ingestion_CSV_WithSchema {
 
         List<StructField> fields = new ArrayList<>();
 
-        StructField field = DataTypes.createStructField("timestamp", DataTypes.TimestampType, true);
+        StructField field = DataTypes.createStructField("Timestamp", DataTypes.TimestampType, true);
         fields.add(field);
 
-        //Take a look to the DF and complete the fields
-        //<FILL>
+        field = DataTypes.createStructField("Site", DataTypes.StringType, true);
+        fields.add(field);
+
+        field = DataTypes.createStructField("Requests", DataTypes.IntegerType, true);
+        fields.add(field);
 
         StructType schema = DataTypes.createStructType(fields);
 
-        //Dataset<Row> tempDF = <FILL>
+        Dataset<Row> tempDF = spark.read().option("header",true).schema(schema).csv(csvFile);
+
+        tempDF.printSchema();
+
+        tempDF.show();
 
         //cache, print schema and visualize 10 rows of the DF
         //<FILL>
