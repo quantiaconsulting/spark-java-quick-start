@@ -1,6 +1,6 @@
-package com.quantiaconsulting.sjqs.solutions.DF;
+package com.quantiaconsulting.sjqs.df.codeBrowsing;
 
-import com.quantiaconsulting.sjqs.solutions.ML.BikeSharing;
+import com.quantiaconsulting.sjqs.solutions.ml.BikeSharing;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SparkSession;
@@ -8,7 +8,7 @@ import org.apache.spark.sql.SparkSession;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 
-public class Ingestion_Parquet {
+public class Ingestion_CSV_noschema {
     public static void main(String[] args) {
 
         String path = BikeSharing.class.getProtectionDomain().getCodeSource().getLocation().getPath();
@@ -18,8 +18,7 @@ public class Ingestion_Parquet {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        String parquetFile = decodedPath + "/resources/wikipedia_pageviews_by_second.parquet";
-
+        String csvFile = decodedPath + "/resources/wikipedia_pageviews_by_second.csv";
 
         SparkSession spark = SparkSession
                 .builder()
@@ -28,8 +27,9 @@ public class Ingestion_Parquet {
 
         Dataset<Row> tempDF = spark
                 .read()
-                .option("inferSchema", "true")
-                .parquet(parquetFile);
+                .option("sep", ",")
+                .option("header", "true")
+                .csv(csvFile);
 
         tempDF.cache();
         tempDF.printSchema();
@@ -37,6 +37,5 @@ public class Ingestion_Parquet {
         System.out.println(tempDF.count());
 
         spark.stop();
-
     }
 }

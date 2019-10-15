@@ -1,6 +1,6 @@
-package com.quantiaconsulting.sjqs.solutions.DF;
+package com.quantiaconsulting.sjqs.df.codeBrowsing;
 
-import com.quantiaconsulting.sjqs.solutions.ML.BikeSharing;
+import com.quantiaconsulting.sjqs.solutions.ml.BikeSharing;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SparkSession;

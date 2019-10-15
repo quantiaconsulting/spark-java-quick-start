@@ -1,6 +1,6 @@
-package com.quantiaconsulting.sjqs.solutions.DF;
+package com.quantiaconsulting.sjqs.df.codeBrowsing;
 
-import com.quantiaconsulting.sjqs.solutions.ML.BikeSharing;
+import com.quantiaconsulting.sjqs.ml.codeBrowsing.BikeSharing;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SparkSession;
@@ -8,9 +8,9 @@ import org.apache.spark.sql.SparkSession;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 
-import static org.apache.spark.sql.functions.col;
+import static org.apache.spark.sql.functions.*;
 
-public class Preparation_DF_Basics {
+public class Preparation_DF_Advanced3 {
     public static void main(String[] args) {
 
         String path = BikeSharing.class.getProtectionDomain().getCodeSource().getLocation().getPath();
@@ -21,7 +21,7 @@ public class Preparation_DF_Basics {
             e.printStackTrace();
         }
         String parquetFile = decodedPath + "/resources/wikipedia_pageviews_by_second.parquet";
-        
+
         SparkSession spark = SparkSession
                 .builder()
                 .appName("Simple Application")
@@ -29,23 +29,20 @@ public class Preparation_DF_Basics {
 
         Dataset<Row> tempDF = spark
                 .read()
+                .option("inferSchema", "true")
                 .parquet(parquetFile);
 
         tempDF.cache();
         tempDF.printSchema();
 
-        //DF API
-        Dataset<Row> orderedDF = tempDF
-                .where( "requests >= 1000" )
-                .orderBy(col("requests").desc_nulls_last())
-                .select("timestamp", "requests");
+        //Date Format: Format date column using format "E" (MON, TUE, ecc), group by this new column and sum request
+        Dataset<Row> dfDF = tempDF.withColumn("DoW",date_format(col("timestamp"), "E"));
+        //Dataset<Row> aggDF = dfDF.groupBy("DoW").sum("requests"); così il nome della colonna è sum(requests)
+        Dataset<Row> aggDF = dfDF.groupBy("DoW").agg(expr("sum(requests) as SOMMA"));
 
-        orderedDF.show(10);
+        dfDF.show(10);
 
-        //Temp Table and sql
-        tempDF.createOrReplaceTempView("pageViews");
-        orderedDF = spark.sql("SELECT timestamp, requests FROM pageViews WHERE requests >= 1000 ORDER BY requests DESC");
-        orderedDF.show(10);
+        aggDF.show(10);
 
         spark.stop();
     }

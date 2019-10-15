@@ -1,6 +1,6 @@
-package com.quantiaconsulting.sjqs.DF;
+package com.quantiaconsulting.sjqs.df.codeBrowsing;
 
-import com.quantiaconsulting.sjqs.ML.BikeSharing;
+import com.quantiaconsulting.sjqs.solutions.ml.BikeSharing;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SparkSession;
@@ -8,11 +8,8 @@ import org.apache.spark.sql.SparkSession;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 
-import static org.apache.spark.sql.functions.*;
-
-public class Preparation_DF_Advanced2 {
+public class Ingestion_CSV_InferSchema {
     public static void main(String[] args) {
-
         String path = BikeSharing.class.getProtectionDomain().getCodeSource().getLocation().getPath();
         String decodedPath = null;
         try {
@@ -20,8 +17,8 @@ public class Preparation_DF_Advanced2 {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        String parquetFile = decodedPath + "/resources/wikipedia_pageviews_by_second.parquet";
-        
+        String csvFile = decodedPath + "/resources/wikipedia_pageviews_by_second.csv";
+
         SparkSession spark = SparkSession
                 .builder()
                 .appName("Simple Application")
@@ -29,22 +26,17 @@ public class Preparation_DF_Advanced2 {
 
         Dataset<Row> tempDF = spark
                 .read()
+                .option("sep", ",")
+                .option("header", "true")
                 .option("inferSchema", "true")
-                .parquet(parquetFile);
+                .csv(csvFile);
 
         tempDF.cache();
         tempDF.printSchema();
-
-        //Group by year and site and finally sum the requests
-        Dataset<Row> grouped = tempDF
-                .withColumn("capturedAt", unix_timestamp(col("timestamp"), "yyyy-MM-dd'T'HH:mm:ss"))
-                .withColumn("year", year(col("timestamp")))
-                .withColumn("month", month(col("timestamp")))
-                //<FILL>
-                ;
-
-        grouped.show(10);
+        tempDF.show(10);
+        System.out.println(tempDF.count());
 
         spark.stop();
     }
+
 }

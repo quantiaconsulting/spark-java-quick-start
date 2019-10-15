@@ -1,6 +1,6 @@
-package com.quantiaconsulting.sjqs.solutions.DF;
+package com.quantiaconsulting.sjqs.df.codeBrowsing;
 
-import com.quantiaconsulting.sjqs.solutions.ML.BikeSharing;
+import com.quantiaconsulting.sjqs.ml.codeBrowsing.BikeSharing;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SparkSession;
@@ -21,7 +21,7 @@ public class Preparation_DF_Advanced1 {
             e.printStackTrace();
         }
         String parquetFile = decodedPath + "/resources/wikipedia_pageviews_by_second.parquet";
-        
+
         SparkSession spark = SparkSession
                 .builder()
                 .appName("Simple Application")
@@ -39,12 +39,6 @@ public class Preparation_DF_Advanced1 {
                 .withColumn("capturedAt", unix_timestamp(col("timestamp"), "yyyy-MM-dd'T'HH:mm:ss"));
 
         utDF.show(10);
-
-        Dataset<Row> enrichedDF = utDF
-                .withColumn("year", year(col("timestamp")))
-                .withColumn("month", month(col("timestamp")));
-
-        enrichedDF.show(10);
 
         spark.stop();
     }

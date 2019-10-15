@@ -1,16 +1,15 @@
-package com.quantiaconsulting.sjqs.DF;
+package com.quantiaconsulting.sjqs.basics.codeBrowsing;
 
-import com.quantiaconsulting.sjqs.ML.BikeSharing;
+import com.quantiaconsulting.sjqs.ml.codeBrowsing.BikeSharing;
+import org.apache.spark.api.java.function.FilterFunction;
 import org.apache.spark.sql.Dataset;
-import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SparkSession;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 
-public class Ingestion_Parquet {
+public class SparkHelloWorld {
     public static void main(String[] args) {
-
         String path = BikeSharing.class.getProtectionDomain().getCodeSource().getLocation().getPath();
         String decodedPath = null;
         try {
@@ -18,20 +17,24 @@ public class Ingestion_Parquet {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        String parquetFile = decodedPath + "/resources/wikipedia_pageviews_by_second.parquet";
 
+        String logFile = decodedPath + "/resources/README.md";
 
         SparkSession spark = SparkSession
                 .builder()
                 .appName("Simple Application")
                 .getOrCreate();
 
-        //Dataset<Row> tempDF = <FILL>
+        Dataset<String> logData = spark
+                .read()
+                .textFile(logFile)
+                .cache();
 
-        //cache, print schema and visualize 10 rows of the DF
-        //<FILL>
+        long numAs = logData.filter((FilterFunction<String>) s -> s.contains("a")).count();
+        long numBs = logData.filter((FilterFunction<String>) s -> s.contains("b")).count();
+
+        System.out.println("Lines with a: " + numAs + ", lines with b: " + numBs);
 
         spark.stop();
-
     }
 }

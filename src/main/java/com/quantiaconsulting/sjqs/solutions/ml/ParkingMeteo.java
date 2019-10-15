@@ -1,4 +1,4 @@
-package com.quantiaconsulting.sjqs.solutions.ML;
+package com.quantiaconsulting.sjqs.solutions.ml;
 
 import org.apache.spark.ml.Pipeline;
 import org.apache.spark.ml.PipelineModel;
@@ -7,7 +7,6 @@ import org.apache.spark.ml.evaluation.RegressionEvaluator;
 import org.apache.spark.ml.feature.OneHotEncoderEstimator;
 import org.apache.spark.ml.feature.StringIndexer;
 import org.apache.spark.ml.feature.VectorAssembler;
-import org.apache.spark.ml.feature.VectorIndexer;
 import org.apache.spark.ml.param.ParamMap;
 import org.apache.spark.ml.regression.LinearRegression;
 import org.apache.spark.ml.regression.RandomForestRegressor;
@@ -20,7 +19,6 @@ import org.apache.spark.sql.SparkSession;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
-import java.util.Arrays;
 
 public class ParkingMeteo {
     public static void main(String[] args) {

@@ -1,14 +1,13 @@
-package com.quantiaconsulting.sjqs.solutions.DF;
+package com.quantiaconsulting.sjqs.basics.codeBrowsing;
 
-import com.quantiaconsulting.sjqs.solutions.ML.BikeSharing;
-import org.apache.spark.sql.Dataset;
-import org.apache.spark.sql.Row;
+import com.quantiaconsulting.sjqs.ml.codeBrowsing.BikeSharing;
+import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.sql.SparkSession;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 
-public class Ingestion_CSV_noschema {
+public class RDD {
     public static void main(String[] args) {
 
         String path = BikeSharing.class.getProtectionDomain().getCodeSource().getLocation().getPath();
@@ -18,24 +17,19 @@ public class Ingestion_CSV_noschema {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        String csvFile = decodedPath + "/resources/wikipedia_pageviews_by_second.csv";
+
+        String logFile = decodedPath + "/resources/README.md";
 
         SparkSession spark = SparkSession
                 .builder()
                 .appName("Simple Application")
                 .getOrCreate();
 
-        Dataset<Row> tempDF = spark
-                .read()
-                .option("sep", ",")
-                .option("header", "true")
-                .csv(csvFile);
+        JavaRDD<String> lines = spark.read().textFile(logFile).javaRDD();
 
-        tempDF.cache();
-        tempDF.printSchema();
-        tempDF.show(10);
-        System.out.println(tempDF.count());
+        JavaRDD<Integer> lineLengths = lines.map(s -> s.length());
+        int totalLength = lineLengths.reduce((a, b) -> a + b);
 
-        spark.stop();
+        System.out.println("the files contains "+totalLength+" lines");
     }
 }

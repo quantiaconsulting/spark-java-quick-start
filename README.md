@@ -26,25 +26,25 @@ Instructions:
 
 ```
 ./bin/spark-submit \
-  --class com.quantiaconsulting.sjqs.SparkHelloWorld \
+  --class com.quantiaconsulting.sjqs.basics.codeBrowsing.SparkHelloWorld \
   --master local[*] \
   <absolute path of your jar>/sjqs-1.0.jar
 ```
 
 * List of the class **ready to be run**:
-	*com.quantiaconsulting.sjqs.SparkHelloWorld
-	* com.quantiaconsulting.sjqs.RDD 
-	* com.quantiaconsulting.sjqs.solutions.DF.Ingestion_CSV_noschema
-	* com.quantiaconsulting.sjqs.solutions.DF.Ingestion_CSV_InferSchema
-	* com.quantiaconsulting.sjqs.solutions.DF.Ingestion_CSV_WithSchema
-	* com.quantiaconsulting.sjqs.solutions.DF.Ingestion_Parquet
-	* com.quantiaconsulting.sjqs.solutions.DF.Preparation_DF_Basics
-	* com.quantiaconsulting.sjqs.solutions.DF.Preparation_DF_Advanced1
-	* com.quantiaconsulting.sjqs.solutions.DF.Preparation_DF_Advanced2
-	* com.quantiaconsulting.sjqs.solutions.DF.Preparation_DF_Advanced3
-	* com.quantiaconsulting.sjqs.solutions.DF.Preparation_DF_Advanced4
-	* com.quantiaconsulting.sjqs.solutions.ML.BikeSharing
-	* com.quantiaconsulting.sjqs.solutions.ML.NLP
+	*com.quantiaconsulting.sjqs.basics.codeBrowsing.SparkHelloWorld
+	* com.quantiaconsulting.sjqs.basics.codeBrowsing.RDD 
+	* com.quantiaconsulting.sjqs.solutions.df.Ingestion_CSV_noschema
+	* com.quantiaconsulting.sjqs.solutions.df.Ingestion_CSV_InferSchema
+	* com.quantiaconsulting.sjqs.solutions.df.Ingestion_CSV_WithSchema
+	* com.quantiaconsulting.sjqs.solutions.df.Ingestion_Parquet
+	* com.quantiaconsulting.sjqs.solutions.df.Preparation_DF_Basics
+	* com.quantiaconsulting.sjqs.df.codeBrowsing.Preparation_DF_Advanced1
+	* com.quantiaconsulting.sjqs.df.codeBrowsing.Preparation_DF_Advanced2
+	* com.quantiaconsulting.sjqs.df.codeBrowsing.Preparation_DF_Advanced3
+	* com.quantiaconsulting.sjqs.df.codeBrowsing.Preparation_DF_Advanced4
+	* com.quantiaconsulting.sjqs.solutions.ml.BikeSharing
+	* com.quantiaconsulting.sjqs.solutions.ml.NLP
 	
 ## Utils
 * If you need to add additional repository to the maven pom please refer to:
