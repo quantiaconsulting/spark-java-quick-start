@@ -80,7 +80,7 @@ Focus on the complexity of the java code if compared to python:
 ### Collect for RDD
 [doc](https://spark.apache.org/docs/latest/rdd-programming-guide.html)
 
-`counts.collect()` only works if the counts RDD is **small enough** to fit the driver memory
+`counts.collect()` only works if the counts RDD is **small enough** to fit the driver memory 
 
 ## Data Ingestion
 ### CSV
@@ -101,7 +101,7 @@ Focus on `.option("inferSchema",true)`
 **Instructions:** 
 
 * Use the class [code](https://github.com/quantiaconsulting/spark-java-quick-start/blob/master/src/main/java/com/quantiaconsulting/sjqs/df/challenges/Ingestion_CSV.java) to start
-* Read the file `/resources/2015_02_clickstream.tsv` and assign it to a DataFrame named testDF with the right schema using what you have learned.
+* Read the file `/resources/2015_02_clickstream.tsv` and assign it to a DataFrame named testDF with the right schema using what you have learned ([src](https://datahub.io/dataset/wikipedia-clickstream))
 
 **Data Schema:**
 
@@ -226,7 +226,7 @@ Focus On:
 **Instructions:** 
 
 * Use the class [code](https://github.com/quantiaconsulting/spark-java-quick-start/blob/master/src/main/java/com/quantiaconsulting/sjqs/df/challenges/Ingestion_Preparation_CSV_Exercise.java) to start
-* Read the file `/resources/2015_02_clickstream.tsv` and assign it to a DataFrame named testDF with the right schema using what you have learned.
+* Read the file `/resources/2015_02_clickstream.tsv` and assign it to a DataFrame named testDF with the right schema using what you have learned ([src](https://datahub.io/dataset/wikipedia-clickstream))
 * Find the top 10 most used path with 2 jumps
 
 **Hints:** 
@@ -317,4 +317,3 @@ remover = new StopWordsRemover()
 * dom:integer
 * dow:string
 * hour:integer
-
