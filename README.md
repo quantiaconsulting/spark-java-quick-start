@@ -80,7 +80,7 @@ Focus on the complexity of the java code if compared to python:
 ### Collect for RDD
 [doc](https://spark.apache.org/docs/latest/rdd-programming-guide.html)
 
-`counts.collect()` only works if the counts RDD is **small enough** to fit the driver memory and if the communication channel is https://
+`counts.collect()` only works if the counts RDD is **small enough** to fit the driver memory
 
 ## Data Ingestion
 ### CSV
@@ -197,7 +197,7 @@ Focus On:
 
 Focus On:
 
-* More Functions! Extract year and monto from a date/datetime: use `year(...)` and `montg(...)` -> [doc](https://spark.apache.org/docs/latest/api/java/org/apache/spark/sql/Dataset.html#withColumn-java.lang.String-org.apache.spark.sql.Column-)
+* More Functions! Extract year and month from a date/datetime: use `year(...)` and `month(...)` -> [doc](https://spark.apache.org/docs/latest/api/java/org/apache/spark/sql/Dataset.html#withColumn-java.lang.String-org.apache.spark.sql.Column-)
 
 ### Advanced - Group and Date Format
 
